@@ -2,7 +2,9 @@
 
 namespace App\Models\User\traits;
 
-use App\Models\User\User;
+use App\Models\Appointment\Appointment;
+use App\Models\Doctor\DoctorShift;
+use App\Models\Service\Service;
 
 trait UserRelations
 {

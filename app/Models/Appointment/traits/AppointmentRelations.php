@@ -2,6 +2,7 @@
 
 namespace App\Models\Appointment\traits;
 
+use App\Models\Attachment\Attachment;
 use App\Models\Service\Service;
 use App\Models\User\User;
 

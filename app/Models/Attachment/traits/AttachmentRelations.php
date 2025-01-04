@@ -3,7 +3,6 @@
 namespace App\Models\Attachment\traits;
 
 use App\Models\Appointment\Appointment;
-use App\Models\User\User;
 
 trait AttachmentRelations
 {
