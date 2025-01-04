@@ -2,7 +2,6 @@
 
 namespace App\Models\User\traits;
 
-use App\Models\Store\Store;
 use App\Models\User\User;
 
 trait UserRelations
