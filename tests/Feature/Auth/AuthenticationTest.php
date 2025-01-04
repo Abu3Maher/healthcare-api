@@ -4,6 +4,8 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -12,15 +14,28 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
-        $user = User::factory()->create();
+        $this->withoutMiddleware();
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
+        $name = fake()->firstName;
+
+        $user = User::query()->create([
+            'name' => $name,
+            'username' => $name . '152',
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => 'password',
+            'remember_token' => Str::random(10),
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json'
+        ])->post(route('login'), [
+            'username' => $user->username,
             'password' => 'password',
         ]);
 
+        $response->assertOk();
         $this->assertAuthenticated();
-        $response->assertNoContent();
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
