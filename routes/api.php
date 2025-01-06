@@ -11,6 +11,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::name('services.')->prefix('/services/')->group([function () {
             Route::get('', [ServiceController::class, 'index'])->name('index');
+            Route::get('/store', [ServiceController::class, 'store'])->name('store');
+
         }]);
     });
 });
