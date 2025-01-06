@@ -44,4 +44,13 @@ class ServiceController extends Controller
 
         return redirect()->back()->with('success', 'Service updated successfully');
     }
+
+    public function delete(ServiceRepository $serviceRepo, $id)
+    {
+
+        $service = $serviceRepo->getServiceById($id);
+        $service->delete();
+
+        return redirect()->back()->with('success', 'Service deleted successfully');
+    }
 }
