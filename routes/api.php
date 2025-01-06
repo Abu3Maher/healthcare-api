@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::name('doctors.')->prefix('/doctors/')->group(function () {
             Route::get('', [DoctorController::class, 'index'])->name('index');
             Route::get('{id}/edit', [DoctorController::class, 'edit'])->name('edit');
-            Route::get('{id}/update', [DoctorController::class, 'update'])->name('update');
+            Route::post('{id}/update', [DoctorController::class, 'update'])->name('update');
 
         });
 
