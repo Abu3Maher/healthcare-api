@@ -14,7 +14,7 @@ class LoginController extends Controller
         if (auth('web')->attempt($data, true)) {
             $user = auth('web')->user();
 
-            return redirect()->route('dashboard')->with('success', 'Welcome, ' . $user->name);
+            return redirect()->back()->with('success', 'Welcome, ' . $user->name);
         }
 
         return redirect()->back()->with('error', 'Incorrect username or password. Please verify your credentials.');
