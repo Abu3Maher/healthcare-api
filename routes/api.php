@@ -13,6 +13,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('', [ServiceController::class, 'index'])->name('index');
             Route::post('/store', [ServiceController::class, 'store'])->name('store');
             Route::get('/{id}/edit', [ServiceController::class, 'edit'])->name('edit');
+            Route::post('{id}/update', [ServiceController::class, 'update'])->name('update');
 
         }]);
     });

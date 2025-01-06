@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Service\CreateServiceRequest;
+use App\Http\Requests\Service\UpdateServiceRequest;
 use App\Models\Service\Service;
 use App\Repositories\Service\ServiceRepository;
 use Illuminate\Http\Request;
@@ -31,5 +32,16 @@ class ServiceController extends Controller
         $service = $serviceRepo->getServiceById($id);
 
         return compact('service');
+    }
+
+    public function update(UpdateServiceRequest $request,
+                           ServiceRepository    $serviceRepo, $id)
+    {
+        $data = $request->validated();
+
+        $service = $serviceRepo->getServiceById($id);
+        $service->update($data);
+
+        return redirect()->back()->with('success', 'Service updated successfully');
     }
 }
