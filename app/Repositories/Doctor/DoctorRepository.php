@@ -8,6 +8,14 @@ use App\Models\User\User;
 
 class DoctorRepository
 {
+    public function getDoctorById($id)
+    {
+        return User::query()
+            ->where('id', '=', $id)
+            ->where('role', '=','doctor')
+            ->firstOrFail();
+    }
+
     public function getAllDoctors()
     {
         return User::query()
