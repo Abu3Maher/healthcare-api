@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::name('appointments.')->prefix('/appointments/')->group(function () {
             Route::get('', [AppointmentController::class, 'index'])->name('index');
             Route::get('create', [AppointmentController::class, 'create'])->name('create');
+            Route::post('store', [AppointmentController::class, 'store'])->name('store');
 
         });
     });
