@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::name('appointments.')->prefix('/appointments/')->group(function () {
             Route::get('', [DoctorController::class, 'index'])->name('index');
+            Route::get('create', [DoctorController::class, 'create'])->name('create');
 
         });
     });
