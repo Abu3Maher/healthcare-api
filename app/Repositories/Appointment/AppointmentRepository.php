@@ -9,6 +9,13 @@ use App\Models\User\User;
 
 class AppointmentRepository
 {
+    public function getAppointmentById($id)
+    {
+        return Appointment::query()
+            ->where('id', '=', $id)
+            ->first();
+    }
+
     public function getAllAppointment()
     {
         $role = auth()->user()->role;

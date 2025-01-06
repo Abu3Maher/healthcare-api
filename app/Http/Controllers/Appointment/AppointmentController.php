@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Appointment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Appointment\CreateAppointmentRequest;
+use App\Http\Requests\Appointment\UpdateAppointmentRequest;
 use App\Models\Appointment\Appointment;
 use App\Repositories\Appointment\AppointmentRepository;
 use App\Repositories\Doctor\DoctorRepository;
 use App\Repositories\Service\ServiceRepository;
+use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
@@ -36,6 +38,19 @@ class AppointmentController extends Controller
             ->create($data);
 
         return redirect()->back()->with('success', 'Appointment booked successfully');
+
+    }
+
+    public function update(UpdateAppointmentRequest $request,
+                           AppointmentRepository    $appointmentRepo, $id)
+    {
+        $data = $request->validated();
+        $appointment = $appointmentRepo->getAppointmentById($id);
+        $appointment->update([
+            'status' => $data['status'],
+        ]);
+
+        return redirect()->back()->with('success', 'Appointment updated successfully');
 
     }
 
