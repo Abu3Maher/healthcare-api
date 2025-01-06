@@ -21,6 +21,7 @@ class AppointmentRepository
         $role = auth()->user()->role;
 
         return Appointment::query()
+            ->with(['doctor', 'service'])
             ->when($role == 'doctor', function ($query) {
                 $query->where('doctor_id', user_id());
             })
