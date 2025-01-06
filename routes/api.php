@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\Constants\UserController;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Service\ServiceController;
@@ -27,8 +28,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         });
 
         Route::name('appointments.')->prefix('/appointments/')->group(function () {
-            Route::get('', [DoctorController::class, 'index'])->name('index');
-            Route::get('create', [DoctorController::class, 'create'])->name('create');
+            Route::get('', [AppointmentController::class, 'index'])->name('index');
+            Route::get('create', [AppointmentController::class, 'create'])->name('create');
 
         });
     });

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Appointment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Appointment\CreateAppointmentRequest;
 use App\Models\Appointment\Appointment;
 use App\Repositories\Appointment\AppointmentRepository;
 use App\Repositories\Doctor\DoctorRepository;
 use App\Repositories\Service\ServiceRepository;
-use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
@@ -25,6 +25,18 @@ class AppointmentController extends Controller
         $services = $serviceRepo->getAllServices();
 
         return compact('doctors', 'services');
+    }
+
+    public function store(CreateAppointmentRequest $request)
+    {
+        $data = $request->validated();
+        data_set($data, 'patient_id', user_id());
+
+        Appointment::query()
+            ->create($data);
+
+        return redirect()->back()->with('success', 'Appointment booked successfully');
+
     }
 
 }

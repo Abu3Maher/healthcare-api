@@ -21,7 +21,7 @@ class Appointment extends Model
         'price',
         'duration',
         'booked_at',
-        'finished_at'
+//        'finished_at',
     ];
 
 }
