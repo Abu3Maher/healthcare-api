@@ -25,4 +25,11 @@ class ServiceController extends Controller
 
         return redirect()->back()->with('success', 'Service created successfully');
     }
+
+    public function edit(ServiceRepository $serviceRepo, $id)
+    {
+        $service = $serviceRepo->getServiceById($id);
+
+        return compact('service');
+    }
 }
