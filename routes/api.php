@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Constants\UserController;
+use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Service\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +18,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::delete('{id}/delete', [ServiceController::class, 'delete'])->name('delete');
 
         }]);
+
+        Route::name('doctors.')->prefix('/doctors/')->group(function () {
+            Route::get('', [DoctorController::class, 'index'])->name('index');
+
+        });
     });
 });
