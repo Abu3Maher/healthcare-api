@@ -22,6 +22,11 @@ class RegisterRequest extends FormRequest
 //                'max:2096',
 //                'mimes:jpg,jpeg,png,svg,webp',
 //            ],
+            'name' => [
+                'required',
+                'min:2',
+                'max:64',
+            ],
             'email' => [
                 'required',
                 'email:rfc:dns',
@@ -40,11 +45,6 @@ class RegisterRequest extends FormRequest
             'role' => [
                 'required',
                 Rule::in(['admin', 'doctor', 'patient']),
-            ],
-            'name' => [
-                'required',
-                'min:2',
-                'max:64',
             ],
         ];
     }
