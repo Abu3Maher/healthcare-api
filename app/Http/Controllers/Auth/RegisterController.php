@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Enums\HttpStatus;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User\User;
 
@@ -12,12 +11,13 @@ class RegisterController extends Controller
     public function __invoke(RegisterRequest $request)
     {
         $data = $request->validated();
-        User::query()->create($data);
+        $user = User::query()->create($data);
+        if (in_array($user->role, ['admin', 'doctor'])) {
 
+            return redirect()->back()->with('success', 'Registration successful! Your order is under review.');
 
-        return response([
-            'message' => 'Registration successful! Your order is under review.',
-            'code' => HttpStatus::OK
-        ], HttpStatus::OK);
+        } elseif ($user->role == 'patient') {
+            return redirect()->back()->with('success', 'Registration successful! Please check your email.');
+        }
     }
 }
