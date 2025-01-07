@@ -12,10 +12,7 @@ class UserController extends Controller
     {
         $user = auth('web')->user();
 
-        return response([
-            'code' => HttpStatus::OK,
-            'message' => 'Successful operation',
-            'data' => new LoginResource($user)
-        ], HttpStatus::OK);
+        return compact('user');
+
     }
 }
