@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    // list of all services 
     public function index(ServiceRepository $serviceRepo)
     {
         $services = $serviceRepo->getAllServices();
@@ -18,6 +19,7 @@ class ServiceController extends Controller
         return compact('services');
     }
 
+    // create service
     public function store(CreateServiceRequest $request)
     {
         $data = $request->validated();
@@ -27,6 +29,7 @@ class ServiceController extends Controller
         return redirect()->back()->with('success', 'Service created successfully');
     }
 
+    // update service form
     public function edit(ServiceRepository $serviceRepo, $id)
     {
         $service = $serviceRepo->getServiceById($id);
@@ -34,6 +37,7 @@ class ServiceController extends Controller
         return compact('service');
     }
 
+    // update service
     public function update(UpdateServiceRequest $request,
                            ServiceRepository    $serviceRepo, $id)
     {
@@ -45,6 +49,7 @@ class ServiceController extends Controller
         return redirect()->back()->with('success', 'Service updated successfully');
     }
 
+    // delete service
     public function delete(ServiceRepository $serviceRepo, $id)
     {
 
